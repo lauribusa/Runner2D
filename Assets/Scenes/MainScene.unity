@@ -615,7 +615,7 @@ MonoBehaviour:
     m_Bits: 256
   walkSounds: []
   maxSpeed: 10
-  timeToMaxSpeed: 0.3
+  timeToMaxSpeed: 2
   brakeQuotient: 0
   accelerationMode: 1
   slideTimeLimited: 0

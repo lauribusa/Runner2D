@@ -191,7 +191,7 @@ public class Player : MonoBehaviour
 		}
 		if (sliding)
 		{
-			boxCollider.size = new Vector2(2, 1);
+			boxCollider.size = new Vector2(1, 1);
 			//gameObject.transform.localScale = new Vector3(2, 1, 1);
 			movementController.ReCalculateBounds();
 		}

@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
 	Player playerToFollow;
+	[HideInInspector]
 	public bool sliding;
+	public float cameraOffset = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +26,13 @@ public class CameraBehavior : MonoBehaviour
 
 	public void SlidingCamera()
 	{
-		if (sliding)
+		/*if (sliding)
 		{
 			gameObject.transform.position = new Vector3(playerToFollow.gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
 		} else
-		{
-			gameObject.transform.position = new Vector3(playerToFollow.gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-		}
+		{*/
+			gameObject.transform.position = new Vector3((playerToFollow.gameObject.transform.position.x + cameraOffset), gameObject.transform.position.y, gameObject.transform.position.z);
+		//}
 		//gameObject.transform.Translate(0.5f * horizontal, 0, 0);
 	}
 }
