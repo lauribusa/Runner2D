@@ -8,13 +8,16 @@ public class Player : MonoBehaviour
 	AnimDelegate UpdateAnimation;
 	public LayerMask enemyLayer;
 
+	Camera mainCamera;
+	CameraBehavior camBehavior;
+
 	[Header("Sound Effects")]
 	public AudioClip[] walkSounds;
 
 	[Header("Run speed")]
 	[Tooltip("Number of meter by second")]
 	public float maxSpeed;
-	[HideInInspector]
+	[Tooltip("Time to get to maximum speed")]
 	public float timeToMaxSpeed;
 	[HideInInspector]
 	public float brakeQuotient = 1;
@@ -72,6 +75,8 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
+		mainCamera = Camera.main;
+		camBehavior = mainCamera.GetComponent<CameraBehavior>();
 		acceleration = (2f * maxSpeed) / Mathf.Pow(timeToMaxSpeed, 2);
 		horizontal = 0;
 		minSpeedThreshold = acceleration / Application.targetFrameRate * 2f;
@@ -106,7 +111,7 @@ public class Player : MonoBehaviour
 		
 		movementController.Move(velocity * Time.deltaTime);
 
-		//UpdateAnimation();
+		UpdateAnimation();
 		if (Input.GetKeyDown(KeyCode.Backspace))
 		{
 			Restart();
@@ -165,13 +170,16 @@ public class Player : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				sliding = true;
-				anim.Play("slide");
+				//anim.Play("slide");
 				gameObject.transform.Translate(0, -0.5f, 0);
+				camBehavior.sliding = sliding;
 				//gameObject.transform.Translate(-0.5f, -0.5f, 0);
 			}
 			if (Input.GetKeyUp(KeyCode.DownArrow) && !movementController._collisions.top)
 			{
 				sliding = false;
+				camBehavior.sliding = sliding;
+				//anim.Play("run");
 				//gameObject.transform.Translate(0.5f, 0.5f, 0);
 				gameObject.transform.Translate(0, 0.5f, 0);
 			}
@@ -199,9 +207,11 @@ public class Player : MonoBehaviour
 		horizontal = 1;
 		//float controlModifier = 1f;
 		speedModifier += Time.deltaTime;
+		float controlModifier = 1f;
 		if (accelerationMode)
 		{
-			velocity.x += horizontal * acceleration * speedModifier * Time.deltaTime;
+
+			velocity.x += horizontal * acceleration * controlModifier * Time.deltaTime;
 
 		}
 		else
@@ -315,7 +325,7 @@ public class Player : MonoBehaviour
 				if (velocity.y > 0)
 					anim.Play("ascend"); // ascending
 				else if (velocity.y < 0)
-					anim.Play("fall"); // falling
+					anim.Play("descend"); // falling
 		}
 	}
 
@@ -363,6 +373,7 @@ public class Player : MonoBehaviour
 			{
 				//sndManager.PlayClip("jump");
 				Jump();
+				
 			}
 			// Wall jump
 			/*else if (
@@ -464,7 +475,7 @@ public class Player : MonoBehaviour
 			//gameManager.PitchDown();
 		}
 	}*/
-	IEnumerator BounceCoroutine()
+	/*IEnumerator BounceCoroutine()
 	{
 		while (true)
 		{
@@ -476,7 +487,7 @@ public class Player : MonoBehaviour
 			}
 			yield return null;
 		}
-	}
+	}*/
 	/*IEnumerator HitEnemyCoroutine(Enemy enemy)
 	{
 		// XXX pushback
