@@ -31,9 +31,9 @@ public class Player : MonoBehaviour
 	[Tooltip("The time (in seconds) during which the player slides before standing up again.")]
 	public float slideTime;
 	bool sliding;
-	[Header("Jump")]
 	[HideInInspector]
 	public uint maxAirJump;
+	[Header("Jump")]
 	[Tooltip("Unity value of max jump height")]
 	public float jumpHeight;
 	[Tooltip("Time in seconds to reach the jump height")]
@@ -139,7 +139,11 @@ public class Player : MonoBehaviour
 	{
 		while (true)
 		{
+			freeze = true;
 			yield return new WaitForSeconds(time);
+			freeze = false;
+			sliding = false;
+			gameObject.transform.Translate(0, 0.5f, 0);
 			yield break;
 		}
 	}
