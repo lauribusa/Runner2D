@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 {
 	AudioSource audioSource;
 	public AudioClip[] audioClips;
+
+	public AudioClip[] playerFootsteps;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -31,8 +33,23 @@ public class SoundManager : MonoBehaviour
 			case "jewel":
 				audioSource.PlayOneShot(audioClips[2]);
 				break;
+			case "footstep":
+				audioSource.PlayOneShot(audioClips[3]);
+				break;
 			default:
 				break;
 		}
+	}
+
+	public void PlayFootstep()
+	{
+		audioSource.PlayOneShot(playerFootsteps[Random.Range(0, playerFootsteps.Length - 1)]);
+		
+	}
+	private static SoundManager _I;
+	public static SoundManager I => _I;
+	public SoundManager()
+	{
+		_I = this;
 	}
 }

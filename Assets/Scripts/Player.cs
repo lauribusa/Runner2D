@@ -135,6 +135,10 @@ public class Player : MonoBehaviour
 
 
 	}
+	public void AnimationPlayFootStep()
+	{
+		SoundManager.I.PlayFootstep();
+	}
 	IEnumerator IsSliding(float time)
 	{
 		while (true)
