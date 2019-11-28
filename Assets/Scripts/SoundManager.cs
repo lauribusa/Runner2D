@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
 	AudioSource audioSource;
 	public AudioClip[] audioClips;
 
-	public AudioClip jump;
+	public AudioClip[] jumps;
 	public AudioClip slide;
 	public AudioClip candle;
 	public AudioClip hurt;
@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
 		switch (sound)
 		{
 			case "jump":
-				audioSource.PlayOneShot(jump);
+				audioSource.PlayOneShot(jumps[Random.Range(0, jumps.Length-1)]);
 				break;
 			case "slide":
 				audioSource.PlayOneShot(slide);

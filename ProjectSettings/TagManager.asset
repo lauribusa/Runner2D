@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - thunder
+  - setLowLight
+  - setHighLight
   layers:
   - Default
   - TransparentFX

@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				sliding = true;
-				
+				SoundManager.I.PlayClip("slide");
 				gameObject.transform.Translate(0, -0.5f, 0);
 			}
 		} else
@@ -175,6 +175,7 @@ public class Player : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				sliding = true;
+				SoundManager.I.PlayClip("slide");
 				
 				//anim.Play("slide");
 				gameObject.transform.Translate(0, -0.5f, 0);
@@ -333,7 +334,7 @@ public class Player : MonoBehaviour
 				anim.Play("run");
 			} else
 			{
-				anim.Play("slide");
+				anim.Play("runtoslide");
 			}
 		}
 		// En l'air
@@ -413,6 +414,7 @@ public class Player : MonoBehaviour
 	Coroutine jumpCoroutine;
 	void Jump()
 	{
+		SoundManager.I.PlayClip("jump");
 		CameraBehavior.I.HardResetCamera();
 		if (jumpCoroutine != null)
 		{
@@ -502,10 +504,24 @@ public class Player : MonoBehaviour
 		Enemy trap = collision.gameObject.GetComponent<Enemy>();
 		//Enemy trap = collision.gameObject.layer
 		//Warp warp = collision.gameObject.GetComponent<Warp>();
-		if(collision.gameObject.layer == 10 && collision.gameObject.tag == "thunder")
+		if(collision.gameObject.layer == 10)
 		{
-			Debug.Log("Lightning triggered");
-			GameManager.I.TriggerLightning();
+			switch (collision.gameObject.tag)
+			{
+				case "thunder":
+					Debug.Log("Lightning triggered");
+					GameManager.I.TriggerLightning();
+					break;
+				case "setLowLight":
+					GlobalLightScript.I.SetMinimum();
+					break;
+				case "setHighLight":
+					GlobalLightScript.I.SetMaximum();
+					break;
+				default:
+					break;
+			}
+			
 		}
 		if(trap != null)
 		{
