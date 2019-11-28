@@ -3196,6 +3196,11 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1566616227783912122, guid: dbde1142e79e73241bbcda742be48bd2,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 17440429}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbde1142e79e73241bbcda742be48bd2, type: 3}
 --- !u!1001 &3606149010879846143
