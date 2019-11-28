@@ -2503,6 +2503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136191394}
   - component: {fileID: 2136191393}
+  - component: {fileID: 2136191395}
   m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
@@ -2536,7 +2537,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3.9789572
+  m_PointLightOuterRadius: 3
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -2557,9 +2558,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136191392}
   m_LocalRotation: {x: 0, y: 0, z: 0.0028153106, w: 0.99999607}
-  m_LocalPosition: {x: 5, y: -0.97, z: -1039.4933}
+  m_LocalPosition: {x: 5, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2136191395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136191392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88191924818e1c14690e5c6718ffc1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLightRange: 3
+  maxLightRange: 4
+  delayInSeconds: 0
