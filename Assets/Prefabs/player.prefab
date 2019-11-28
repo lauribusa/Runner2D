@@ -52,7 +52,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  walkSounds: []
+  playerLives: 1
   maxSpeed: 10
   timeToMaxSpeed: 2
   brakeQuotient: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   slideTime: 1
   maxAirJump: 3
   jumpHeight: 2
+  minAscensionTime: 0
   timeToMaxJump: 0.3
   airControl: 1
   animationByParameters: 0

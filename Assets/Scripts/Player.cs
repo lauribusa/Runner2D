@@ -13,9 +13,6 @@ public class Player : MonoBehaviour
 	Camera mainCamera;
 	CameraBehavior camBehavior;
 
-	[Header("Sound Effects")]
-	public AudioClip[] walkSounds;
-
 	[Header("Run speed")]
 	[Tooltip("Number of meter by second")]
 	public float maxSpeed;
@@ -104,6 +101,7 @@ public class Player : MonoBehaviour
 	{
 		AlwaysRunning();
 		//UpdateHorizontalControl();
+		
 		UpdateGravity();
 		UpdateSlide();
 		UpdateJump();
@@ -113,6 +111,15 @@ public class Player : MonoBehaviour
 		movementController.Move(velocity * Time.deltaTime);
 
 		UpdateAnimation();
+		if (movementController._collisions.right && !CameraBehavior.I.playerStuck)
+		{
+			CameraBehavior.I.playerStuck = true;
+		}
+		else
+		if (!movementController._collisions.right && CameraBehavior.I.playerStuck)
+		{
+			CameraBehavior.I.playerStuck = false;
+		}
 		if (Input.GetKeyDown(KeyCode.Backspace))
 		{
 			Restart();
@@ -120,7 +127,10 @@ public class Player : MonoBehaviour
 		}
 
 	}
-
+	private void OnBecameInvisible()
+	{
+		Debug.Log("out of camera");
+	}
 	public void AnimationPlayFootStep()
 	{
 		SoundManager.I.PlayFootstep();
@@ -157,6 +167,7 @@ public class Player : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				sliding = true;
+				
 				gameObject.transform.Translate(0, -0.5f, 0);
 			}
 		} else
@@ -164,6 +175,7 @@ public class Player : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				sliding = true;
+				
 				//anim.Play("slide");
 				gameObject.transform.Translate(0, -0.5f, 0);
 				camBehavior.sliding = sliding;
@@ -401,6 +413,7 @@ public class Player : MonoBehaviour
 	Coroutine jumpCoroutine;
 	void Jump()
 	{
+		CameraBehavior.I.HardResetCamera();
 		if (jumpCoroutine != null)
 		{
 			StopCoroutine(jumpCoroutine);
@@ -489,12 +502,18 @@ public class Player : MonoBehaviour
 		Enemy trap = collision.gameObject.GetComponent<Enemy>();
 		//Enemy trap = collision.gameObject.layer
 		//Warp warp = collision.gameObject.GetComponent<Warp>();
+		if(collision.gameObject.layer == 10 && collision.gameObject.tag == "thunder")
+		{
+			Debug.Log("Lightning triggered");
+			GameManager.I.TriggerLightning();
+		}
 		if(trap != null)
 		{
 			Debug.Log("lives: "+playerLives);
-			if(playerLives == 0)
+			if(playerLives <= 0)
 			{
 				Restart();
+				CameraBehavior.I.HardResetCamera();
 				GameManager.I.RespawnItems();
 			} else
 			{

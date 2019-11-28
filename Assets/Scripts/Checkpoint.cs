@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-	public Player playerToSpawn;
+	public GameObject playerPrefab;
 	// Start is called before the first frame update
 
 
 	public void Spawn()
 	{
-		Instantiate(playerToSpawn, transform.position, Quaternion.identity);
-		playerToSpawn = FindObjectOfType<Player>();
+		Instantiate(playerPrefab, transform.position, Quaternion.identity);
 	}
 }
