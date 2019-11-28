@@ -7,6 +7,11 @@ public class SoundManager : MonoBehaviour
 	AudioSource audioSource;
 	public AudioClip[] audioClips;
 
+	public AudioClip jump;
+	public AudioClip slide;
+	public AudioClip candle;
+	public AudioClip hurt;
+
 	public AudioClip[] playerFootsteps;
 	// Start is called before the first frame update
 	void Start()
@@ -25,16 +30,19 @@ public class SoundManager : MonoBehaviour
 		switch (sound)
 		{
 			case "jump":
-				audioSource.PlayOneShot(audioClips[0]);
+				audioSource.PlayOneShot(jump);
 				break;
-			case "playerAttack":
-				audioSource.PlayOneShot(audioClips[1]);
+			case "slide":
+				audioSource.PlayOneShot(slide);
 				break;
 			case "jewel":
 				audioSource.PlayOneShot(audioClips[2]);
 				break;
-			case "footstep":
-				audioSource.PlayOneShot(audioClips[3]);
+			case "candle":
+				audioSource.PlayOneShot(candle);
+				break;
+			case "hurt":
+				audioSource.PlayOneShot(hurt);
 				break;
 			default:
 				break;
