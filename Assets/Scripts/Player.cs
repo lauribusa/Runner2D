@@ -447,6 +447,7 @@ public class Player : MonoBehaviour
 		//Warp warp = collision.gameObject.GetComponent<Warp>();
 		if(trap != null)
 		{
+			Debug.Log("lives: "+playerLives);
 			if(playerLives == 0)
 			{
 				Restart();
