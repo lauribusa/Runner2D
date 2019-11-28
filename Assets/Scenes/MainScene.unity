@@ -1263,6 +1263,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
   - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
   - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
+  jump: {fileID: 0}
+  slide: {fileID: 0}
+  candle: {fileID: 0}
+  hurt: {fileID: 0}
   playerFootsteps:
   - {fileID: 8300000, guid: 5c8870fcc4fc95c40a8d6ffd7a0b1620, type: 3}
   - {fileID: 8300000, guid: e0ba5dd20de3bc54b96b9a3376236cb2, type: 3}
@@ -2637,6 +2641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083306649124571101, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
+        type: 3}
+      propertyPath: minAscensionTime
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4083306649124571105, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
         type: 3}

@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
 	[Header("Jump")]
 	[Tooltip("Unity value of max jump height")]
 	public float jumpHeight;
+	[Tooltip("Minimum time on ascension in jump")]
+	public float minAscensionTime;
 	[Tooltip("Time in seconds to reach the jump height")]
 	public float timeToMaxJump;
 	[Tooltip("Can i change direction in air?")]
@@ -396,10 +398,42 @@ public class Player : MonoBehaviour
 			}*/
 		}
 	}
-
+	Coroutine jumpCoroutine;
 	void Jump()
 	{
+		if (jumpCoroutine != null)
+		{
+			StopCoroutine(jumpCoroutine);
+		}
+
+		jumpCoroutine = StartCoroutine(JumpCoroutine());
+	}
+
+	IEnumerator JumpCoroutine()
+	{
 		velocity.y = jumpForce;
+
+		float time = 0;
+		while (time < minAscensionTime)
+		{
+			time += Time.deltaTime;
+			yield return null;
+		}
+
+		while (true)
+		{
+			if (!Input.GetKey(KeyCode.Space))
+			{
+				break;
+			}
+			if (velocity.y <= 0)
+			{
+				break;
+			}
+			yield return null;
+		}
+
+		velocity.y = 0;
 	}
 	/*public void Bounce()
 	{
