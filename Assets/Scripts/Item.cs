@@ -19,11 +19,16 @@ public class Item : MonoBehaviour
 	{
 		//OnTouchJewel();
 	}
-
+	public void Respawn()
+	{
+		gameObject.SetActive(true);
+	}
 	public void OnTouchJewel()
 	{
+		SoundManager.I.PlayClip("jewel");
 		//sndManager.PlayClip("jewel");
 		//scoreDisplay.UpdateScore(point);
-		Destroy(gameObject);
+		gameObject.SetActive(false);
+		//Destroy(gameObject);
 	}
 }

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 	AnimDelegate UpdateAnimation;
 	public LayerMask enemyLayer;
 
+	public int playerLives = 3;
+
 	Camera mainCamera;
 	CameraBehavior camBehavior;
 
@@ -47,8 +49,6 @@ public class Player : MonoBehaviour
 	[Header("Other")]
 	public bool animationByParameters;
 
-	SoundManager sndManager;
-	GameManager gameManager;
 	float acceleration;
 	float minSpeedThreshold;
 
@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 	float jumpForce;
 	float maxFallingSpeed;
 	int horizontal;
+
+	bool hurt;
 
 	bool bouncing;
 
@@ -81,11 +83,8 @@ public class Player : MonoBehaviour
 		horizontal = 0;
 		minSpeedThreshold = acceleration / Application.targetFrameRate * 2f;
 		movementController = GetComponent<MovementController>();
-		sndManager = FindObjectOfType<SoundManager>();
 		anim = GetComponent<Animator>();
 		boxCollider = GetComponent<BoxCollider2D>();
-		gameManager = FindObjectOfType<GameManager>();
-		//playerAttack = GetComponent<PlayerAttack>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		animationTimes = GetComponent<AnimationTimes>();
 
@@ -119,22 +118,7 @@ public class Player : MonoBehaviour
 		}
 
 	}
-	void UpdateAttack()
-	{
-		/*if (isAttacking)
-		{
-			if (!movementController._collisions.bottom)
-			{
-				anim.Play("airattack");
-			}
-			else
-			{
-				anim.Play("attack");
-			}
-		}*/
 
-
-	}
 	public void AnimationPlayFootStep()
 	{
 		SoundManager.I.PlayFootstep();
@@ -232,6 +216,10 @@ public class Player : MonoBehaviour
 	}
 	void UpdateHorizontalControl()
 	{
+		if (hurt)
+		{
+			return;
+		}
 		// Reset velocity at start of frame is hitting wall
 		// Then I will add one frame of velocity to stay sticking on wall for example
 		// But I want my speed to stop when reaching wall
@@ -454,8 +442,20 @@ public class Player : MonoBehaviour
 	{
 		//Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 		Item item = collision.gameObject.GetComponent<Item>();
+		Enemy trap = collision.gameObject.GetComponent<Enemy>();
+		//Enemy trap = collision.gameObject.layer
 		//Warp warp = collision.gameObject.GetComponent<Warp>();
-
+		if(trap != null)
+		{
+			if(playerLives == 0)
+			{
+				Restart();
+				GameManager.I.RespawnItems();
+			} else
+			{
+				playerLives--;
+			}
+		}
 		/*if (enemy != null && !playerAttack.isAttacking)
 		{
 			HitEnemy(enemy);
