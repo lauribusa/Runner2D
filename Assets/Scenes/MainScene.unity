@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2849,16 +2849,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 4083306649124571101, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
-        type: 3}
-      propertyPath: minAscensionTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4083306649124571101, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
-        type: 3}
-      propertyPath: playerLives
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4083306649124571105, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2912,6 +2902,16 @@ PrefabInstance:
     - target: {fileID: 4083306649124571105, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083306649124571101, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
+        type: 3}
+      propertyPath: minAscensionTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083306649124571101, guid: 98dd8ae8dba6ef54c82046d1f3eddcef,
+        type: 3}
+      propertyPath: playerLives
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
