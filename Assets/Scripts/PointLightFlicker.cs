@@ -30,7 +30,7 @@ public class PointLightFlicker : MonoBehaviour
 		while (true)
 		{
 			light2D.pointLightOuterRadius = Random.Range(3f, 4f);
-			yield return new WaitForSeconds(0f);
+			yield return new WaitForSeconds(delayInSeconds);
 			
 
 		}
