@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
 		{
 			if (sliding)
 			{
-
+				
 				StartCoroutine(IsSliding(slideTime));
 			}
 			if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -301,6 +301,13 @@ public class Player : MonoBehaviour
 
 	void UpdateAnimationByCode()
 	{
+		if(!movementController._collisions.bottom && sliding)
+		{
+			if (velocity.y > 0)
+				anim.Play("ascend"); // ascending
+			else if (velocity.y < 0)
+				anim.Play("descend"); // falling
+		}
 		if (freeze)
 			return;
 
@@ -361,7 +368,10 @@ public class Player : MonoBehaviour
 
 			bouncing = false;
 		}
-
+		if(sliding && Input.GetKeyDown(KeyCode.Space) && freeze)
+		{
+			Jump();
+		}
 		if (Input.GetKeyDown(KeyCode.Space) && !freeze)
 		{
 			// Normal jump
