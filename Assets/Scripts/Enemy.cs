@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 	Animator anim;
 	AnimationTimes animationTimes;
 	SpriteRenderer spriteRenderer;
+	public bool isDeathZone;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -20,4 +21,13 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+	public void PlayAttack()
+	{
+		if (isDeathZone)
+		{
+			return;
+		}
+		anim.Play("attack");
+	}
 }

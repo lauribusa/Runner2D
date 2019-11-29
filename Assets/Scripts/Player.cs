@@ -407,18 +407,7 @@ public class Player : MonoBehaviour
 				
 			}
 			// Wall jump
-			/*else if (
-				!movementController._collisions.bottom &&
-				(movementController._collisions.left ||
-				 movementController._collisions.right))
-			{
-				WallJump();
-			}*/
-			// Normal or airJump
-			/*else if (doubleJumpCount < maxAirJump && !movementController._collisions.bottom)
-			{
-				DoubleJump();
-			}*/
+			
 		}
 	}
 	Coroutine jumpCoroutine;
