@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RickLevelDesign.unity
     guid: 4d530711673033c4e948c6693db26a27
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: cae7614f00b6b234180b908d96bb656d
   m_configObjects: {}
