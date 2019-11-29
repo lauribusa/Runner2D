@@ -145,18 +145,39 @@ public class Player : MonoBehaviour
 	{
 		SoundManager.I.PlayFootstep();
 	}
+	void SwitchSlidePosition(bool switchSlide)
+	{
+		if (switchSlide){
+			sliding = true;
+			gameObject.transform.Translate(0, -0.5f, 0);
+		} else
+		{
+			sliding = false;
+			gameObject.transform.Translate(0, 0.5f, 0);
+		}
+	}
+
 	IEnumerator IsSliding(float time)
 	{
 		while (true)
 		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				freeze = false;
+				sliding = false;
+				SwitchSlidePosition(false);
+				//Jump();
+				yield break;
+			}
 			freeze = true;
 			yield return new WaitForSeconds(time);
 			freeze = false;
 			sliding = false;
-			gameObject.transform.Translate(0, 0.5f, 0);
-			yield break;
+			break;
 		}
+		SwitchSlidePosition(false);
 	}
+	Coroutine slideCoroutine;
 	void UpdateSlide()
 	{
 		if (freeze || !movementController._collisions.bottom)
@@ -172,13 +193,12 @@ public class Player : MonoBehaviour
 			if (sliding)
 			{
 				
-				StartCoroutine(IsSliding(slideTime));
+				slideCoroutine = StartCoroutine(IsSliding(slideTime));
 			}
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
-				sliding = true;
+				SwitchSlidePosition(true);
 				SoundManager.I.PlayClip("slide");
-				gameObject.transform.Translate(0, -0.5f, 0);
 			}
 		} else
 		{
@@ -202,22 +222,36 @@ public class Player : MonoBehaviour
 			}
 
 		}
-		if (movementController._collisions.bottom && movementController._collisions.top)
-		{
-			sliding = true;
-		}
 		if (sliding)
 		{
-			boxCollider.size = new Vector2(1, 1);
-			//gameObject.transform.localScale = new Vector3(2, 1, 1);
-			movementController.ReCalculateBounds();
+			RecalculateBounds(true);
+	
 		}
 		else
 		{
+			RecalculateBounds(false);
+		
+		}
+	}
+	void RecalculateBounds(bool slide)
+	{
+		if (slide)
+		{
+			boxCollider.size = new Vector2(1, 1);
+			movementController.ReCalculateBounds();
+		} else
+		{
 			boxCollider.size = new Vector2(1, 2);
-			//gameObject.transform.localScale = new Vector3(1, 2, 1);
 			movementController.ReCalculateBounds();
 		}
+	}
+	void Slide()
+	{
+		if(slideCoroutine != null)
+		{
+			StopCoroutine(IsSliding(slideTime));
+		}
+		slideCoroutine = StartCoroutine(IsSliding(slideTime));
 	}
 	void AlwaysRunning()
 	{
@@ -390,12 +424,17 @@ public class Player : MonoBehaviour
 	{
 		if (movementController._collisions.bottom)
 		{
-
-			bouncing = false;
+			
 		}
 		if(sliding && Input.GetKeyDown(KeyCode.Space) && freeze)
 		{
+			sliding = false;
+			freeze = false;
+			SwitchSlidePosition(false);
+			RecalculateBounds(false);
 			Jump();
+			//StopCoroutine(slideCoroutine);
+			//Jump();
 		}
 		if (Input.GetKeyDown(KeyCode.Space) && !freeze)
 		{
@@ -449,14 +488,7 @@ public class Player : MonoBehaviour
 
 		velocity.y = 0;
 	}
-	/*public void Bounce()
-	{
-		bouncing = true;
-		anim.Play("spin");
-		horizontal = spriteRenderer.flipX ? 1 : -1;
-		velocity.y = jumpForce * verticalBounceForce;
-		velocity.x = horizontalBounceForce * maxSpeed * horizontal;
-	}*/
+	
 	void WallJump()
 	{
 		int direction = movementController._collisions.left ? 1 : -1;
@@ -469,40 +501,14 @@ public class Player : MonoBehaviour
 		checkpoint.Spawn();
 		Destroy(gameObject);
 	}
-	/*void DoubleJump()
-	{
-		StartCoroutine(DoubleJumpCoroutine());
-	}
-
-	IEnumerator DoubleJumpCoroutine()
-	{
-		Jump();
-		doubleJumpCount++;
-		doubleJumping = true;
-		anim.Play("FrogDoubleJumping");
-
-		while (!anim.GetCurrentAnimatorStateInfo(0).IsName("jump"))
-		{
-			yield return null;
-		}
-
-		while (true)
-		{
-			if (!anim.GetCurrentAnimatorStateInfo(0).IsName("jump") ||
-				movementController._collisions.bottom)
-				break;
-			yield return null;
-		}
-		doubleJumping = false;
-	}*/
+	
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		//Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+	
 		Item item = collision.gameObject.GetComponent<Item>();
 		Enemy trap = collision.gameObject.GetComponent<Enemy>();
-		//Enemy trap = collision.gameObject.layer
-		//Warp warp = collision.gameObject.GetComponent<Warp>();
+
 		if(collision.gameObject.layer == 10)
 		{
 			switch (collision.gameObject.tag)
@@ -542,15 +548,7 @@ public class Player : MonoBehaviour
 				playerLives--;
 			}
 		}
-		/*if (enemy != null && !playerAttack.isAttacking)
-		{
-			HitEnemy(enemy);
-		}
-		else
-		if (enemy != null && playerAttack.isAttacking)
-		{
-			enemy.Damage();
-		}*/
+		
 		if (item != null)
 		{
 			item.OnTouchJewel();
@@ -565,42 +563,4 @@ public class Player : MonoBehaviour
 		CameraBehavior.I.HardResetCamera();
 		GameManager.I.RespawnItems();
 	}
-	/*Coroutine hitEnemy;
-	void HitEnemy(Enemy enemy)
-	{
-		if (hitEnemy == null)
-		{
-			hitEnemy = StartCoroutine(HitEnemyCoroutine(enemy));
-			//gameManager.PitchDown();
-		}
-	}*/
-	/*IEnumerator BounceCoroutine()
-	{
-		while (true)
-		{
-			anim.Play("spin");
-			if (movementController._collisions.bottom)
-			{
-				anim.Play("idle");
-				yield break;
-			}
-			yield return null;
-		}
-	}*/
-	/*IEnumerator HitEnemyCoroutine(Enemy enemy)
-	{
-		// XXX pushback
-		velocity.x = enemy.pushBackForce * Mathf.Sign(transform.position.x - enemy.transform.position.x);
-		anim.Play("hurt");
-		freeze = true;
-
-		// Wait for the time of the Hurt animation to be finished
-		yield return new WaitForSeconds(animationTimes.GetTime("player_hurt"));
-
-		Checkpoint checkpoint = FindObjectOfType<Checkpoint>();
-		checkpoint.Spawn();
-
-		freeze = false;
-		Destroy(gameObject);
-	}*/
 }
