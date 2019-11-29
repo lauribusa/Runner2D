@@ -543,7 +543,7 @@ PrefabInstance:
     - target: {fileID: 519220029388596521, guid: 707079b826ac9884588955434f56ec87,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.5
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 519220029388596521, guid: 707079b826ac9884588955434f56ec87,
         type: 3}
@@ -2329,12 +2329,12 @@ PrefabInstance:
         type: 3}
       propertyPath: candle
       value: 
-      objectReference: {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
+      objectReference: {fileID: 8300000, guid: ad2dfd407ff32884bafbad2823492231, type: 3}
     - target: {fileID: 1566616227783912123, guid: dbde1142e79e73241bbcda742be48bd2,
         type: 3}
       propertyPath: hurt
       value: 
-      objectReference: {fileID: 8300000, guid: c927326d2dacc3c4586a55edffe32151, type: 3}
+      objectReference: {fileID: 8300000, guid: 9cf889464a0720f468fb436ef7f6f1b9, type: 3}
     - target: {fileID: 1566616227783912124, guid: dbde1142e79e73241bbcda742be48bd2,
         type: 3}
       propertyPath: m_Volume

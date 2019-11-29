@@ -536,8 +536,10 @@ public class Player : MonoBehaviour
 		if(trap != null)
 		{
 			Debug.Log("lives: "+playerLives);
+			SoundManager.I.PlayClip("hurt");
 			if (!trap.isDeathZone)
 			{
+				
 				trap.PlayAttack();
 			}
 			if(playerLives <= 0)
