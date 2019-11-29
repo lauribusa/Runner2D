@@ -140,10 +140,7 @@ public class Player : MonoBehaviour
 		}
 
 	}
-	private void OnBecameInvisible()
-	{
-		Debug.Log("out of camera");
-	}
+	
 	public void AnimationPlayFootStep()
 	{
 		SoundManager.I.PlayFootstep();
@@ -513,6 +510,7 @@ public class Player : MonoBehaviour
 				case "thunder":
 					Debug.Log("Lightning triggered");
 					GameManager.I.TriggerLightning();
+					SoundManager.I.PlayRandomClap();
 					break;
 				case "setLowLight":
 					GlobalLightScript.I.SetMinimum();

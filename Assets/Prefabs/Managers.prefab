@@ -49,6 +49,7 @@ MonoBehaviour:
   maxIntensity: 5
   strikesDelay: 0
   numberOfFlashes: 5
+  canvas: {fileID: 0}
 --- !u!114 &1566616227783912123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,18 +62,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a570c405c11614faada6073ba5de32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips:
-  - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
-  - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
-  - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
-  - {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
   jumps:
   - {fileID: 8300000, guid: 9ac374d2c09b7cb46b0b0c25461e068a, type: 3}
   - {fileID: 8300000, guid: 36315672eea02fc49a547e84200f1641, type: 3}
   - {fileID: 8300000, guid: c927326d2dacc3c4586a55edffe32151, type: 3}
   slide: {fileID: 8300000, guid: 1480fecacc50d934986650d58798b2ce, type: 3}
-  candle: {fileID: 0}
-  hurt: {fileID: 0}
+  candle: {fileID: 8300000, guid: 65d3921710bc2db45a785502cd58563f, type: 3}
+  hurt: {fileID: 8300000, guid: 9cf889464a0720f468fb436ef7f6f1b9, type: 3}
+  monsterInArea: {fileID: 8300000, guid: 709287d020099904d95257f60e96ff44, type: 3}
+  thunderclaps:
+  - {fileID: 8300000, guid: 715ea6ef2f2ffd64692b7f5c268b9739, type: 3}
   playerFootsteps:
   - {fileID: 8300000, guid: 5aefad45ea80165489b1f02645011c33, type: 3}
   - {fileID: 8300000, guid: 851357a7894d77448a81b404284b91ff, type: 3}

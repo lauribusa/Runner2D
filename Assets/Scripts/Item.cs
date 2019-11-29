@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
 	}
 	public void OnTouchJewel()
 	{
-		SoundManager.I.PlayClip("jewel");
+		SoundManager.I.PlayClip("candle");
 		//sndManager.PlayClip("jewel");
 		//scoreDisplay.UpdateScore(point);
 		gameObject.SetActive(false);
