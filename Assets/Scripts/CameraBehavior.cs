@@ -37,6 +37,10 @@ public class CameraBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+		if (GameManager.I.gamePaused)
+		{
+			return;
+		}
 		if (!playerToFollow)
 		{
 			playerToFollow = FindObjectOfType<Player>();

@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
 	bool bouncing;
 
-	Animator anim;
+	public Animator anim;
 	SpriteRenderer spriteRenderer;
 	BoxCollider2D boxCollider;
 
@@ -71,6 +71,12 @@ public class Player : MonoBehaviour
 	//PlayerAttack playerAttack;
 	AnimationTimes animationTimes;
 
+	private static Player _I;
+	public static Player I => _I;
+	public Player()
+	{
+		_I = this;
+	}
 
 	public bool freeze { get; private set; }
 
@@ -99,6 +105,10 @@ public class Player : MonoBehaviour
 	}
 	void Update()
 	{
+		if (GameManager.I.gamePaused)
+		{
+			return;
+		}
 		AlwaysRunning();
 		//UpdateHorizontalControl();
 		
