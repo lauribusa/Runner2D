@@ -133,7 +133,10 @@ public class Player : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Backspace))
 		{
 			Restart();
-			
+		}
+		if(gameObject.transform.position.y <= -10)
+		{
+			Die();
 		}
 
 	}
@@ -517,6 +520,10 @@ public class Player : MonoBehaviour
 				case "setHighLight":
 					GlobalLightScript.I.SetMaximum();
 					break;
+				case "warp":
+					Warp warp = collision.gameObject.GetComponent<Warp>();
+					warp.ChangeScene();
+					break;
 				default:
 					break;
 			}
@@ -525,11 +532,10 @@ public class Player : MonoBehaviour
 		if(trap != null)
 		{
 			Debug.Log("lives: "+playerLives);
+
 			if(playerLives <= 0)
 			{
-				Restart();
-				CameraBehavior.I.HardResetCamera();
-				GameManager.I.RespawnItems();
+				Die();
 			} else
 			{
 				playerLives--;
@@ -552,7 +558,12 @@ public class Player : MonoBehaviour
 		//warp?.NextLevel();
 
 	}
-
+	void Die()
+	{
+		Restart();
+		CameraBehavior.I.HardResetCamera();
+		GameManager.I.RespawnItems();
+	}
 	/*Coroutine hitEnemy;
 	void HitEnemy(Enemy enemy)
 	{
