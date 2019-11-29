@@ -133,7 +133,10 @@ public class Player : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Backspace))
 		{
 			Restart();
-			
+		}
+		if(gameObject.transform.position.y <= -10)
+		{
+			Die();
 		}
 
 	}
@@ -407,18 +410,7 @@ public class Player : MonoBehaviour
 				
 			}
 			// Wall jump
-			/*else if (
-				!movementController._collisions.bottom &&
-				(movementController._collisions.left ||
-				 movementController._collisions.right))
-			{
-				WallJump();
-			}*/
-			// Normal or airJump
-			/*else if (doubleJumpCount < maxAirJump && !movementController._collisions.bottom)
-			{
-				DoubleJump();
-			}*/
+			
 		}
 	}
 	Coroutine jumpCoroutine;
@@ -528,6 +520,10 @@ public class Player : MonoBehaviour
 				case "setHighLight":
 					GlobalLightScript.I.SetMaximum();
 					break;
+				case "warp":
+					Warp warp = collision.gameObject.GetComponent<Warp>();
+					warp.ChangeScene();
+					break;
 				default:
 					break;
 			}
@@ -536,11 +532,13 @@ public class Player : MonoBehaviour
 		if(trap != null)
 		{
 			Debug.Log("lives: "+playerLives);
+			if (!trap.isDeathZone)
+			{
+				trap.PlayAttack();
+			}
 			if(playerLives <= 0)
 			{
-				Restart();
-				CameraBehavior.I.HardResetCamera();
-				GameManager.I.RespawnItems();
+				Die();
 			} else
 			{
 				playerLives--;
@@ -563,7 +561,12 @@ public class Player : MonoBehaviour
 		//warp?.NextLevel();
 
 	}
-
+	void Die()
+	{
+		Restart();
+		CameraBehavior.I.HardResetCamera();
+		GameManager.I.RespawnItems();
+	}
 	/*Coroutine hitEnemy;
 	void HitEnemy(Enemy enemy)
 	{
