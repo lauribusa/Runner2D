@@ -21,12 +21,15 @@ public class GameManager : MonoBehaviour
 
 	bool gamePaused;
 
+	[Tooltip("Canvas for pause menu")]
+	public GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {
 		levelItems = FindObjectsOfType<Item>();
 		main = Camera.main;
 		cameraObject = main.gameObject;
+		canvas.SetActive(false);
 	}
 
     // Update is called once per frame
@@ -39,6 +42,21 @@ public class GameManager : MonoBehaviour
 		Light2D[] lightnings = cameraObject.GetComponentsInChildren<Light2D>();
 		StartCoroutine(LightningCoroutine(lightnings[0], minIntensity, maxIntensity, strikesDelay, numberOfFlashes));
 
+	}
+	public void PauseGame()
+	{
+		canvas.SetActive(true);
+		gamePaused = true;
+	}
+	public void ResumeGame()
+	{
+		canvas.SetActive(false);
+		gamePaused = false;
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 
 	IEnumerator LightningCoroutine(Light2D light, float minIntensity, float maxIntensity, float delay, int numberOfFlashes)

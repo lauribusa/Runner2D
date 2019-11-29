@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 989011441399950181}
   - component: {fileID: 3571843607353740824}
   - component: {fileID: 482178687284929337}
+  - component: {fileID: -631833288403050003}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
@@ -263,6 +264,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba001e2b44eb7040bd62099aaeaea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-631833288403050003
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578780664629031297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c914fd85872bf945a11e6025144983b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9161108196189170125
 GameObject:
   m_ObjectHideFlags: 0
