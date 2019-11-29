@@ -5,13 +5,16 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 	AudioSource audioSource;
-	public AudioClip[] audioClips;
 
 	public AudioClip[] jumps;
 	public AudioClip slide;
 	public AudioClip candle;
 	public AudioClip hurt;
+	public AudioClip monsterInArea;
 
+	[Header("Thunderclaps")]
+	public AudioClip[] thunderclaps;
+	[Header("Footsteps")]
 	public AudioClip[] playerFootsteps;
 	// Start is called before the first frame update
 	void Start()
@@ -35,9 +38,6 @@ public class SoundManager : MonoBehaviour
 			case "slide":
 				audioSource.PlayOneShot(slide);
 				break;
-			case "jewel":
-				audioSource.PlayOneShot(audioClips[2]);
-				break;
 			case "candle":
 				audioSource.PlayOneShot(candle);
 				break;
@@ -48,11 +48,21 @@ public class SoundManager : MonoBehaviour
 				break;
 		}
 	}
-
+	public void PlayMonsterWarning()
+	{
+		audioSource.PlayOneShot(monsterInArea);
+	}
 	public void PlayFootstep()
 	{
-		audioSource.PlayOneShot(playerFootsteps[Random.Range(0, playerFootsteps.Length - 1)]);
-		
+		PlayRandom(playerFootsteps);		
+	}
+	void PlayRandom(AudioClip[] audioclips)
+	{
+		audioSource.PlayOneShot(audioclips[Random.Range(0, audioclips.Length - 1)]);
+	}
+	public void PlayRandomClap()
+	{
+		PlayRandom(thunderclaps);
 	}
 	private static SoundManager _I;
 	public static SoundManager I => _I;
