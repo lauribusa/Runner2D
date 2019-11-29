@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	[Tooltip("Number of thunder flashes")]
 	public int numberOfFlashes;
 
-	bool gamePaused;
+	public bool gamePaused { get; private set; }
 
 	[Tooltip("Canvas for pause menu")]
 	public GameObject canvas;
@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+		if (!gamePaused && Input.GetKeyDown(KeyCode.Escape))
+		{
+			PauseGame();
+		}
     }
 	public void TriggerLightning()
 	{
@@ -47,11 +50,13 @@ public class GameManager : MonoBehaviour
 	{
 		canvas.SetActive(true);
 		gamePaused = true;
+		Player.I.anim.enabled = false;
 	}
 	public void ResumeGame()
 	{
-		canvas.SetActive(false);
 		gamePaused = false;
+		canvas.SetActive(false);
+		Player.I.anim.enabled = true;
 	}
 
 	public void QuitGame()
