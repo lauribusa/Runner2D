@@ -49,6 +49,7 @@ MonoBehaviour:
   maxIntensity: 5
   strikesDelay: 0
   numberOfFlashes: 5
+  mainMenuScene: MenuScene
   canvas: {fileID: 0}
 --- !u!114 &1566616227783912123
 MonoBehaviour:

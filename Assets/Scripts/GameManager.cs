@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.LWRP;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 	[Tooltip("Number of thunder flashes")]
 	public int numberOfFlashes;
 
+	public string mainMenuScene;
 	public bool gamePaused { get; private set; }
 
 	[Tooltip("Canvas for pause menu")]
@@ -57,6 +59,11 @@ public class GameManager : MonoBehaviour
 		gamePaused = false;
 		canvas.SetActive(false);
 		Player.I.anim.enabled = true;
+	}
+
+	public void MainMenuSwitch()
+	{
+		SceneManager.LoadScene(mainMenuScene);
 	}
 
 	public void QuitGame()
