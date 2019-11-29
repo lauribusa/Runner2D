@@ -21,13 +21,16 @@ public class Enemy : MonoBehaviour
     {
         
     }
-
+	private void OnBecameVisible()
+	{
+		Debug.Log("Monster in range");
+		SoundManager.I.PlayMonsterWarning();
+	}
 	public void PlayAttack()
 	{
-		if (isDeathZone)
+		if (!isDeathZone)
 		{
-			return;
-		}
-		anim.Play("attack");
+			anim.Play("attack");
+		} 
 	}
 }
