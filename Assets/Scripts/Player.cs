@@ -532,7 +532,10 @@ public class Player : MonoBehaviour
 		if(trap != null)
 		{
 			Debug.Log("lives: "+playerLives);
-
+			if (!trap.isDeathZone)
+			{
+				trap.PlayAttack();
+			}
 			if(playerLives <= 0)
 			{
 				Die();
