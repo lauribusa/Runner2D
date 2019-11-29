@@ -38,4 +38,5 @@ Logs/
 obj/
 Packages/
 Temp/
+Builds/
 /Library/ScriptAssemblies/Assembly-CSharp.dll
